@@ -1,31 +1,40 @@
-import { useEffect, useState } from 'react';
-import { Typography } from '@mui/material';
-import { User } from './interfaces/User';
+import { Home } from './pages/Home';
+import { Login } from './pages/Login';
+import { Register } from './pages/Register';
+import { Leaderboard } from './pages/Leaderboard';
+import { GameModes } from './pages/GameModes';
+import {
+  createBrowserRouter, 
+  RouterProvider
+} from 'react-router-dom'
 
-const apiUrl = import.meta.env.VITE_API_URL;
 
 function App() {
-  const [prost, setProst] = useState('');
-
-  useEffect(() => {
-    const fetchData = async () => {
-        const response = await fetch(`${apiUrl}/users/1`);
-        if (!response.ok) {
-          throw new Error(`o crapat`);
-        }
-        const user: User = await response.json();
-        if (user.name) {
-          setProst(user.name);
-        }
-    };
-    fetchData();
-  }, []);
-
+  const router = createBrowserRouter([
+    {
+      path: '/', 
+      element: <Home/>
+    }, 
+    {
+      path: '/login', 
+      element: <Login/>
+    }, 
+    {
+      path: '/register', 
+      element: <Register/>
+    }, 
+    {
+      path: '/leaderboard', // here probably shoul be the id of the user as query parameter
+      element: <Leaderboard/>
+    }, 
+    {
+      path: '/gamemode', // again, id of user as query param
+      element: <GameModes/>
+    }
+  ])
   return (
-    <Typography style={{ color: 'rgb(170, 51, 106)' }}>
-      cine-i prost? {prost?? "loading..."}
-    </Typography>
-  );
+    <RouterProvider router={router}/>
+  )
 }
 
 export default App;
