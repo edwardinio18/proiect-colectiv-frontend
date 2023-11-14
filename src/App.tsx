@@ -3,6 +3,7 @@ import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 import { Leaderboard } from './pages/Leaderboard';
 import { GameModes } from './pages/GameModes';
+
 import {
   createBrowserRouter, 
   RouterProvider
@@ -24,7 +25,7 @@ function App() {
       element: <Register/>
     }, 
     {
-      path: '/leaderboard', // here probably shoul be the id of the user as query parameter
+      path: '/leaderboard', // here probably should be the id of the user as query parameter
       element: <Leaderboard/>
     }, 
     {

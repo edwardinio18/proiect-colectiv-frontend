@@ -1,0 +1,50 @@
+html,
+body {
+    margin: 0;
+}
+
+.game-modes-container {
+    font-family: 'Chalkduster', 'Arial', sans-serif;
+    color: white;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.game-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url('/resources/background.png');
+    background-size: cover;
+}
+
+.game-mode-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    font-family: 'Chalkduster', 'Arial', sans-serif;
+}
+
+.game-mode-button {
+    font-size: 4em;
+    padding: 20px 60px;
+    border-radius: 15px;
+    cursor: pointer;
+    border: none;
+    color: white;
+}
+
+.practice {
+    background-color: #6daaec;
+}
+
+.normal {
+    background-color: #6daaec;
+}
+
+.game-mode-button:hover {
+    opacity: 0.8;
+}
