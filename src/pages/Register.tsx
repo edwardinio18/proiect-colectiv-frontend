@@ -3,27 +3,51 @@ import background from '../resources/background2.png';
 import Header from '../components/Header';
 import '../styles/Header.css';
 import '../styles/GameModes.css';
-import React from 'react';
+import React, { useState } from 'react';
 import { IUser } from '../interfaces/User';
+import { validateUsername, validatePasswd, PasswordError } from '../utils/validators';
+import { Errors } from '../components/ErrorMessages';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 
-const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+const handleSubmit = async (event: React.FormEvent<HTMLFormElement>, setErrors: React.Dispatch<React.SetStateAction<string[]>>, navigate: NavigateFunction): Promise<void> => {
     event.preventDefault();
+    const errors: string[] = []
     const data = new FormData(event.currentTarget);
-    const userName = data.get('username');
-    const password = data.get('password');
-    const confirmPassword = data.get('confirmPassword');
-    type SendToBeRegister = Omit<IUser, "highScoreMixed" | "highScorePhotos" | "highScoreText" | "id">;
-    const objToSend: SendToBeRegister = {
-        userName: userName as String, 
-        password: password as String, 
+    const userName = data.get('username') as string;
+    const password = data.get('password') as string;
+    const confirmPassword = data.get('confirmPassword') as string;
+    if (!validateUsername(userName)) {
+        errors.push("Username cannot be empty");
     }
-    // TODO backend shenanigans 
-    // TODO2 fumeaza
-    // TODO3 injural pe iakab
+    if (validatePasswd(password) !== true) {
+        const errMsg: PasswordError = validatePasswd(password) as PasswordError;
+        errors.push(errMsg);
+    }
+    if (password !== confirmPassword) {
+        errors.push("Passwords dont match");
+    }
+
+    //will move it lower after the fetch to push also the backend errors
+    if (errors.length > 0) {
+        console.log(errors);
+        setErrors(errors);
+        return;
+    }
+    type SendToBERegister = Omit<IUser, "highScoreMixed" | "highScorePhotos" | "highScoreText" | "id">;
+    const objToSend: SendToBERegister = {
+        userName: userName,
+        password: password,
+    }
+    navigate('/gamemode');
+    console.log(objToSend);
 }
 
 export function Register() {
-    
+    const [errors, setErrors] = useState<string[]>([]);
+    const navigate = useNavigate();
+    const handleFormSUbmit = (event: React.FormEvent<HTMLFormElement>) => {
+        handleSubmit(event, setErrors, navigate);
+    }
     return (<>
         <Box style={{
             backgroundImage: `url(${background})`,
@@ -80,7 +104,7 @@ export function Register() {
                     },
                 }}
                 autoComplete="off"
-                onSubmit={handleSubmit}
+                onSubmit={handleFormSUbmit}
             >
                 <TextField
                     required
@@ -109,6 +133,7 @@ export function Register() {
                     Register
                 </Button>
             </Box>
+            <Errors errors={errors}></Errors>
         </Box>
     </>
     );

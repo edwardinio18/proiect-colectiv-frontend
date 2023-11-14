@@ -1,8 +1,8 @@
 export interface IUser {
-    id?: Number, 
-    userName?: String, 
-    password?: String, 
-    highScoreMixed?: Number, 
-    highScorePhotos?: Number, 
-    highScoreText?: Number, 
+    id?: number, 
+    userName?: string, 
+    password?: string, 
+    highScoreMixed?: number, 
+    highScorePhotos?: number, 
+    highScoreText?: number, 
 };
