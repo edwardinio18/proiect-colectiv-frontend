@@ -4,7 +4,7 @@ import '../styles/Header.css';
 export const Header: React.FC = () => {
   return (
     <header className="game-header">
-      <div className="header-title">MioriticMinds test</div>
+      <div className="header-title">MioriticMinds</div>
       <nav>
         <ul>
           <li><a href="#">Home</a></li>
