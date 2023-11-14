@@ -5,12 +5,11 @@
     justify-content: space-around;
     align-items: center;
     padding: 1.1em;
-    font-family: 'Chalkduster', 'Arial', sans-serif;
+    font-family: 'Chalkduster', sans-serif;
 }
 
 .header-title {
     font-size: 2em;
-    margin: 0;
 }
 
 nav ul {
