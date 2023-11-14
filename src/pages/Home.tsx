@@ -18,6 +18,9 @@ export function Home(){
                     <li>
                         <Link to="/gamemode">Go select gamemode</Link>
                     </li>
+                    <li>
+                        <Link to="/questiontype">Go select questiontype</Link>
+                    </li>
                 </ul>
             </nav>
         </>
