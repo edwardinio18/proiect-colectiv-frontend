@@ -65,9 +65,8 @@ export function Register() {
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    //justifyContent: 'center',
                     height: '100vh',
-                    backgroundColor: 'transparent', // Transparent background
+                    backgroundColor: 'transparent',
                     fontFamily: "'Chalkduster', sans-serif",
                 }}>
                     <Typography variant="h2" style={{ 
@@ -84,45 +83,47 @@ export function Register() {
                             flexDirection: 'column',
                             alignItems: 'center',
                             justifyContent: 'space-evenly',
-                            height: '50vh', // Adjust height to match your design
-                            maxWidth: '400px', // Adjust width to match your design
-                            //margin: 'auto',
+                            height: '50vh', 
+                            maxWidth: '400px', 
+                            
                             marginTop: '65px',
                             padding: '10px',
                             borderRadius: '12px',
-                            backgroundColor: 'transparent', // Semi-transparent white
-                            //backdropFilter: 'blur(8px)', // Apply a blur effect to the background
-                            // '& .MuiTextField-root': {
-                            //     m: 1, // Margin
-                            //     width: '100%', // Full width of the container
-                            // },
-                            // '& .MuiInputBase-root': {
-                            //     color: '#000', // Input text color
-                            // },
-                            // '& .MuiOutlinedInput-root': {
-                            //     '& fieldset': {
-                            //         borderColor: 'rgba(0, 0, 0, 0.23)', // Border color
-                            //     },
-                            //     '&:hover fieldset': {
-                            //         borderColor: 'rgba(0, 0, 0, 0.5)', // Border color on hover
-                            //     },
-                            //     '&.Mui-focused fieldset': {
-                            //         borderColor: '#1976d2', // Border color when focused (adjust as needed)
-                            //     },
-                            // },
-                            // '& .MuiInputLabel-root': {
-                            //     color: '#000', // Label color
-                            // },
-                            // '& .MuiButton-root': {
-                            //     mt: 3, // Margin top
-                            //     width: '100%', // Full width of the container
-                            //     backgroundColor: '#1976d2', // Button color (adjust as needed)
-                            //     color: 'white', // Button text color
-                            //     padding: '10px 0', // Padding inside the button (adjust as needed)
-                            //     '&:hover': {
-                            //         backgroundColor: '#115293', // Button hover color (adjust as needed)
-                            //     },
-                            // },
+                            backgroundColor: 'transparent', 
+                            backdropFilter: 'blur(8px)', 
+                            '& .MuiTextField-root': {
+                                m: 1, 
+                                width: '100%', 
+                            },
+                            '& .MuiInputBase-input': {
+                                fontFamily: 'Chalkduster, sans-serif',
+                                color: '#a3a3a3'
+                            },
+                            '& .MuiInputLabel-root': {
+                                fontFamily: 'Chalkduster, sans-serif',
+                                color: '#a3a3a3'
+                            },
+                            '& .MuiOutlinedInput-root': {
+                                '& fieldset': {
+                                    borderColor: 'rgba(0, 0, 0, 0.23)', 
+                                },
+                                '&:hover fieldset': {
+                                    borderColor: 'rgba(0, 0, 0, 0.5)', 
+                                },
+                                '&.Mui-focused fieldset': {
+                                    borderColor: '#1976d2', 
+                                },
+                            },
+                            '& .MuiButton-root': {
+                                mt: 3, 
+                                width: '100%', 
+                                backgroundColor: '#1976d2', 
+                                color: 'white',
+                                padding: '10px 0',
+                                '&:hover': {
+                                    backgroundColor: '#115293',
+                                },
+                            },
                         }}
                         autoComplete="off"
                         onSubmit={handleFormSUbmit}
@@ -147,16 +148,6 @@ export function Register() {
                                 width: '550px',
                                 borderRadius: '10px',
                             }}
-                                sx={{
-                                    '& .MuiInputBase-input': {
-                                        fontFamily: 'Chalkduster, sans-serif',
-                                        color: '#a3a3a3'
-                                    },
-                                    '& .MuiInputLabel-root': {
-                                        fontFamily: 'Chalkduster, sans-serif',
-                                        color: '#a3a3a3'
-                                    },
-                                }}
                         />
                         <Typography variant="h5" style={{ 
                                 marginBottom: '10px' , 
@@ -178,16 +169,6 @@ export function Register() {
                                 backgroundColor: '#e6e6e6',
                                 width: '550px',
                                 borderRadius: '10px',}}
-                                sx={{
-                                    '& .MuiInputBase-input': {
-                                        fontFamily: 'Chalkduster, sans-serif',
-                                        color: '#a3a3a3'
-                                    },
-                                    '& .MuiInputLabel-root': {
-                                        fontFamily: 'Chalkduster, sans-serif',
-                                        color: '#a3a3a3'
-                                    },
-                                }}
                         />
                         <Typography variant="h5" style={{ 
                                 marginBottom: '10px' , 
@@ -209,23 +190,13 @@ export function Register() {
                                 fontFamily: "'Chalkduster', sans-serif",
                                 backgroundColor: '#e6e6e6',
                                 width: '550px',
-                                borderRadius: '10px',}}
-                                sx={{
-                                    '& .MuiInputBase-input': {
-                                        fontFamily: 'Chalkduster, sans-serif',
-                                        color: '#a3a3a3'
-                                    },
-                                    '& .MuiInputLabel-root': {
-                                        fontFamily: 'Chalkduster, sans-serif',
-                                        color: '#a3a3a3'
-                                    },
-                                }}
+                                borderRadius: '10px',}}            
                         />
                         <Button
                             type="submit"
                             variant="contained"
                             style={{
-                                textTransform: 'none', // Prevent capitalization
+                                textTransform: 'none',
                                 width: '300px',
                                 fontFamily: "'Chalkduster', sans-serif",
                                 fontSize: '30px',
