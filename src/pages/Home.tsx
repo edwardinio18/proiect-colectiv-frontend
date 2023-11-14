@@ -21,6 +21,9 @@ export function Home(){
                     <li>
                         <Link to="/questiontype">Go select questiontype</Link>
                     </li>
+                    <li>
+                        <Link to="/myaccount">Go select myaccount</Link>
+                    </li>
                 </ul>
             </nav>
         </>
