@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/GameModes.css'
+import '../styles/Game.css'
 import Header from '../components/Header';
 
 export const GameModes: React.FC = () => {
@@ -11,7 +12,7 @@ export const GameModes: React.FC = () => {
   };
 
   return (
-    <div className="game-modes-container">
+    <div className="game-container">
       <Header />
       <main className="game-main">
         <h1>Please select</h1><h1>the game mode:</h1>

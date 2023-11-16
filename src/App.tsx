@@ -12,7 +12,7 @@ import {
 } from 'react-router-dom'
 import { PracticeGame } from './pages/PracticeGame';
 import { NormalGame } from './pages/NormalGame';
-import { Ramkings } from './pages/Rankings';
+import { Rankings } from './pages/Rankings';
 
 
 function App() {
@@ -55,7 +55,7 @@ function App() {
     },
     {
       path: '/rankings',
-      element: <Ramkings />
+      element: <Rankings />
     }
   ])
   return (
