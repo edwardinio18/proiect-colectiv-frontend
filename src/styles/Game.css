@@ -24,6 +24,8 @@ body {
 .game-main h1 {
     font-size: 2.5em;
     margin-top: 0;
+    text-align: center;
+    max-width: 1000px;
 }
 
 .game-main h1:first-child {
