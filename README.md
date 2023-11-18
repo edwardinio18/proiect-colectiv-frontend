@@ -9,10 +9,10 @@
 ### Installing
 
 1. `git clone git@github.com:edwardinio18/proiect-colectiv-frontend.git`
-2. `npm install`
-3. `npm run dev`
-4. Open `http://localhost:5173` in your browser
-5. Enjoy!
+2. `cd proiect-colectiv-frontend`
+3. `npm install`
+4. `npm run dev`
+5. Open `http://localhost:5173` in your browser
 
 ### Mockup server
 
