@@ -1,31 +1,17 @@
-import { Link } from "react-router-dom";
+import HomeHeader from "../components/HomeHeader.tsx";
+import {Link} from "react-router-dom";
+import "../styles/Home.css";
 
-export function Home(){
+export function Home() {
     return (
-        <>
-            <h1>Home page</h1>
-            <nav>
-                <ul>
-                    <li>
-                        <Link to="/login">Go login</Link>
-                    </li>
-                    <li>
-                        <Link to="/register">Go register</Link>
-                    </li>
-                    <li>
-                        <Link to="/leaderboard">Go to leaderboard</Link>
-                    </li>
-                    <li>
-                        <Link to="/gamemode">Go select gamemode</Link>
-                    </li>
-                    <li>
-                        <Link to="/questiontype">Go select questiontype</Link>
-                    </li>
-                    <li>
-                        <Link to="/myaccount">Go select myaccount</Link>
-                    </li>
-                </ul>
-            </nav>
-        </>
-    )
+        <div className="home-container">
+            <HomeHeader/>
+            <main className="home-main">
+                <div className="home-buttons">
+                    <Link className={"home-button"} to={"/login"}>Login</Link>
+                    <Link className={"home-button"} to={"/register"}>Register</Link>
+                </div>
+            </main>
+        </div>
+    );
 }
