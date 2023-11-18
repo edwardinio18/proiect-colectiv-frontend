@@ -1,6 +1,5 @@
 import HomeHeader from "../components/HomeHeader.tsx";
 import {Link} from "react-router-dom";
-import {Button} from "@mui/material";
 import "../styles/Home.css";
 
 export function Home() {
