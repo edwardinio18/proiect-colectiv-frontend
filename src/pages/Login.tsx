@@ -19,14 +19,6 @@ const handleSubmit = async (event: React.FormEvent<HTMLFormElement>, setErrors: 
     const data = new FormData(event.currentTarget);
     const userName = data.get('username') as string;
     const password = data.get('password') as string;
-    if (!validateUsername(userName)) {
-        errors.push("Username cannot be empty");
-    }
-    if (validatePasswd(password) !== true) {
-        const errMsg: PasswordError = validatePasswd(password) as PasswordError;
-        errors.push(errMsg);
-    }
-
     type SendToBERegister = Omit<IUser, "highScoreMixed" | "highScorePhotos" | "highScoreText" | "id">;
     const objToSend: SendToBERegister = {
         userName: userName,
