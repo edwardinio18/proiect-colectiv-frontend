@@ -9,6 +9,10 @@ import { validateUsername, validatePasswd, PasswordError } from '../utils/valida
 import { Errors } from '../components/ErrorMessages';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 
+
+const API_URL = import.meta.env.VITE_API_URL;
+const REGISTER_ENDPOINT = `${API_URL}/Users/register`;
+
 const handleSubmit = async (event: React.FormEvent<HTMLFormElement>, setErrors: React.Dispatch<React.SetStateAction<string[]>>, navigate: NavigateFunction): Promise<void> => {
     event.preventDefault();
     const errors: string[] = []
@@ -27,19 +31,28 @@ const handleSubmit = async (event: React.FormEvent<HTMLFormElement>, setErrors: 
         errors.push("Passwords dont match");
     }
 
-    //will move it lower after the fetch to push also the backend errors
-    if (errors.length > 0) {
-        console.log(errors);
-        setErrors(errors);
-        return;
-    }
     type SendToBERegister = Omit<IUser, "highScoreMixed" | "highScorePhotos" | "highScoreText" | "id">;
     const objToSend: SendToBERegister = {
         userName: userName,
         password: password,
     }
-    navigate('/gamemode');
-    console.log(objToSend);
+    const response = await fetch(REGISTER_ENDPOINT, {
+        method: 'POST', 
+        headers: {
+            "Content-type": "application/json", 
+        },
+        body: JSON.stringify(objToSend)
+    })
+    //TODO should use reactAuth to keep track of the id of the player. for the moment no need to do thar
+    if(!response.ok){
+        const errResponse = await response.text();
+        errors.push(errResponse);
+    }
+    if (errors.length > 0) {
+        setErrors(errors);
+        return;
+    }
+    navigate('/');
 }
 
 export function Register() {
