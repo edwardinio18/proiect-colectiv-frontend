@@ -11,7 +11,7 @@ import { NavigateFunction, useNavigate } from 'react-router-dom';
 
 
 const API_URL = import.meta.env.VITE_API_URL;
-const REGISTER_ENDPOINT = `${API_URL}/Users/register`;
+const REGISTER_ENDPOINT = `${API_URL}/Users/login`;
 
 const handleSubmit = async (event: React.FormEvent<HTMLFormElement>, setErrors: React.Dispatch<React.SetStateAction<string[]>>, navigate: NavigateFunction): Promise<void> => {
     event.preventDefault();
