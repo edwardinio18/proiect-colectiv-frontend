@@ -19,16 +19,12 @@ const handleSubmit = async (event: React.FormEvent<HTMLFormElement>, setErrors: 
     const data = new FormData(event.currentTarget);
     const userName = data.get('username') as string;
     const password = data.get('password') as string;
-    const confirmPassword = data.get('confirmPassword') as string;
     if (!validateUsername(userName)) {
         errors.push("Username cannot be empty");
     }
     if (validatePasswd(password) !== true) {
         const errMsg: PasswordError = validatePasswd(password) as PasswordError;
         errors.push(errMsg);
-    }
-    if (password !== confirmPassword) {
-        errors.push("Passwords dont match");
     }
 
     type SendToBERegister = Omit<IUser, "highScoreMixed" | "highScorePhotos" | "highScoreText" | "id">;
@@ -86,7 +82,7 @@ export function Login() {
                         marginTop: '70px',
                         fontFamily: "'Chalkduster', sans-serif",
                     }}>
-                        Register
+                        Login
                     </Typography>
                     <Box
                         component="form"
@@ -196,7 +192,7 @@ export function Login() {
                                 marginTop: '30px'
                             }}
                         >
-                            Register
+                            Login
                         </Button>
                     </Box>
                     <Errors errors={errors}></Errors>
