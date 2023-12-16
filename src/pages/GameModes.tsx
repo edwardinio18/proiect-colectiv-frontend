@@ -12,7 +12,7 @@ export const GameModes: React.FC = () => {
                 <h1>Please select</h1><h1>the game mode:</h1>
                 <div className="game-mode-buttons">
                     <Link to="/practice" className="game-mode-button">Practice</Link>
-                    <Link to="/normal" className="game-mode-button">Normal</Link>
+                    <Link to="/question-type" className="game-mode-button">Normal</Link>
                 </div>
             </main>
         </div>

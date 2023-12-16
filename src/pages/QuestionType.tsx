@@ -5,11 +5,8 @@ import '../styles/Header.css';
 import '../styles/GameModes.css';
 import { useNavigate } from 'react-router-dom';
 
-type QuestionTypeProps = {
-    gameMode: string
-}
 
-export function NormalGame({gameMode}: QuestionTypeProps){
+export function QuestionType(){
     const navigate = useNavigate();
 
     const handleButtonClick = (questionType: string) => {

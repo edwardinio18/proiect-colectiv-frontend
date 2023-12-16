@@ -3,7 +3,6 @@ import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 import { Leaderboard } from './pages/Leaderboard';
 import { GameModes } from './pages/GameModes';
-import { QuestionTypes } from './pages/QuestionTypes';
 import { MyAccount } from './pages/MyAccount';
 
 
@@ -12,7 +11,7 @@ import {
   RouterProvider
 } from 'react-router-dom'
 import { PracticeGame } from './pages/PracticeGame';
-import { NormalGame } from './pages/NormalGame';
+import { QuestionType } from './pages/QuestionType';
 import { Rankings } from './pages/Rankings';
 import { OnlyText } from './pages/OnlyText';
 import { OnlyPhotos } from './pages/OnlyPhotos';
@@ -34,19 +33,15 @@ function App() {
       element: <Register />
     },
     {
-      path: '/leaderboard', // here probably should be the id of the user as query parameter
+      path: '/leaderboard',
       element: <Leaderboard />
     },
     {
-      path: '/gamemode', // again, id of user as query param
+      path: '/gamemode',
       element: <GameModes />
     },
     {
-      path: '/questiontype', // again, id of user as query param
-      element: <QuestionTypes />
-    },
-    {
-      path: '/myaccount', // again, id of user as query param
+      path: '/myaccount',
       element: <MyAccount />
     },
     {
@@ -54,8 +49,8 @@ function App() {
       element: <PracticeGame />
     },
     {
-      path: '/normal',
-      element: <NormalGame />
+      path: '/question-type',
+      element: <QuestionType />
     },
     {
       path: '/rankings',
