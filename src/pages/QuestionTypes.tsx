@@ -13,7 +13,7 @@ export function QuestionTypes({gameMode}: QuestionTypeProps){
     const navigate = useNavigate();
 
     const handleButtonClick = (questionType: string) => {
-        //navigate(/${questionType});
+        
     };
 
     return <>

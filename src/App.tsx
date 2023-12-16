@@ -6,6 +6,7 @@ import { GameModes } from './pages/GameModes';
 import { QuestionTypes } from './pages/QuestionTypes';
 import { MyAccount } from './pages/MyAccount';
 
+
 import {
   createBrowserRouter,
   RouterProvider
@@ -13,6 +14,9 @@ import {
 import { PracticeGame } from './pages/PracticeGame';
 import { NormalGame } from './pages/NormalGame';
 import { Rankings } from './pages/Rankings';
+import { OnlyText } from './pages/OnlyText';
+import { OnlyPhotos } from './pages/OnlyPhotos';
+import { MixedMode } from './pages/MixedMode';
 
 
 function App() {
@@ -56,6 +60,18 @@ function App() {
     {
       path: '/rankings',
       element: <Rankings />
+    }, 
+    {
+      path: '/normal-text', 
+      element: < OnlyText/>
+    }, 
+    {
+      path: '/normal-images',
+      element: <OnlyPhotos/>
+    }, 
+    {
+      path: '/normal-mixed', 
+      element: <MixedMode/>
     }
   ])
   return (
