@@ -91,6 +91,7 @@ export const PracticeGame: React.FC = () => {
             let style = {
                 textTransform: 'none',
                 width: '350px',
+                height: '100px',
                 fontFamily: "'Chalkduster', sans-serif",
                 fontSize: '25px',
                 backgroundColor: '#1095e0',
@@ -127,7 +128,6 @@ export const PracticeGame: React.FC = () => {
     
 
     const imageStyle = {
-        //paddingLeft: '270px',
         width: '250px',  
         height: '350px', 
         objectFit: 'cover' 
