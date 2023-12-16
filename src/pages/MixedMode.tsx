@@ -197,7 +197,9 @@ export const MixedMode: React.FC = () => {
                                 </>
                             )}
                         </div>
-                        <Box>
+                        <Box style={{ textAlign: "center" }}>
+                            <br />
+                            <br />
                             <h2>Score: {score}</h2>
                             <h2>Time left: {timer} seconds left</h2>
                         </Box>
@@ -207,33 +209,38 @@ export const MixedMode: React.FC = () => {
         </Box>
          <Dialog
                 open={gameOver}
-                onClose={() => setGameOver(false)} // Optionally close the dialog
+                onClose={() => setGameOver(false)} 
                 aria-labelledby="highscore-dialog-title"
                 aria-describedby="highscore-dialog-description"
                 sx={{
-                    '& .MuiPaper-root': { // Styles for the dialog's paper component
-                        backgroundColor: 'rgba(0, 0, 0, 0.85)', // Semi-transparent black
+                    '& .MuiPaper-root': { 
+                        backgroundColor: 'rgba(0, 0, 0, 0.6)', 
                         color: 'white',
                         fontFamily: "'Chalkduster', sans-serif",
+                        width: '600px',
+                        height: '400px'
                     }
                 }}
             >
-                <DialogTitle id="highscore-dialog-title" sx={{textAlign: 'center'}}>Game Over</DialogTitle>
+                <DialogTitle id="highscore-dialog-title" sx={{textAlign: 'center', paddingTop: '30px', fontFamily: "'Chalkduster', sans-serif", fontSize: '50px'}}>Game Over</DialogTitle>
                 <DialogContent>
-                    <DialogContentText id="highscore-dialog-description" sx={{color: 'white'}}>
+                    <DialogContentText id="highscore-dialog-description" sx={{color: 'white', textAlign: 'center', paddingTop: '50px', fontSize: '35px', fontFamily: "'Chalkduster', sans-serif",}}>
                         Your High Score: {score}
                     </DialogContentText>
                 </DialogContent>
-                <DialogActions sx={{ justifyContent: 'center' }}>
+                <DialogActions sx={{ justifyContent: 'center', paddingBottom: '40px', fontSize: '30px' }}>
                     <Button 
                         onClick={() => {navigate('/rankings')}} 
                         color="primary"
                         sx={{
+                            width: '450px', height: '70px',
                             backgroundColor: '#1095e0', 
                             color: 'white', 
                             '&:hover': {
                                 backgroundColor: '#0d7ecb'
-                            }
+                            },
+                            fontFamily: "'Chalkduster', sans-serif",
+                            fontSize: '25px'
                         }} 
                     >
                         Go to Leaderboard

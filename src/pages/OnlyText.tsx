@@ -20,7 +20,7 @@ export const OnlyText: React.FC = () => {
     const [selectedAnswer, setSelectedAnswer] = useState<Answer | null>(null);
     const [hasAnswered, setHasAnswered] = useState<boolean>(false);
     const [score, setScore] = useState<number>(0);
-    const [timer, setTimer] = useState<number>(10);
+    const [timer, setTimer] = useState<number>(120);
     const [gameOver, setGameOver] = useState<boolean>(false);
 
     const navigate = useNavigate();
@@ -186,7 +186,9 @@ export const OnlyText: React.FC = () => {
                                 </>
                             )}
                         </div>
-                        <Box>
+                        <Box style={{ textAlign: "center" }}>
+                            <br />
+                            <br />
                             <h2>Score: {score}</h2>
                             <h2>Time left: {timer} seconds left</h2>
                         </Box>
@@ -200,12 +202,11 @@ export const OnlyText: React.FC = () => {
 
         <Dialog
             open={gameOver}
-            onClose={() => setGameOver(false)} // Optionally close the dialog
-            aria-labelledby="highscore-dialog-title"
+            onClose={() => setGameOver(false)} 
             aria-describedby="highscore-dialog-description"
             sx={{
-                '& .MuiPaper-root': { // Styles for the dialog's paper component
-                    backgroundColor: 'rgba(0, 0, 0, 0.85)', // Semi-transparent black
+                '& .MuiPaper-root': {
+                    backgroundColor: 'rgba(0, 0, 0, 0.85)',
                     color: 'white',
                     fontFamily: "'Chalkduster', sans-serif",
                 }
@@ -232,7 +233,46 @@ export const OnlyText: React.FC = () => {
                     Go to Leaderboard
                 </Button>
             </DialogActions>
-        </Dialog>
+        </Dialog><Dialog
+                open={gameOver}
+                onClose={() => setGameOver(false)} 
+                aria-labelledby="highscore-dialog-title"
+                aria-describedby="highscore-dialog-description"
+                sx={{
+                    '& .MuiPaper-root': { 
+                        backgroundColor: 'rgba(0, 0, 0, 0.6)', 
+                        color: 'white',
+                        fontFamily: "'Chalkduster', sans-serif",
+                        width: '600px',
+                        height: '400px'
+                    }
+                }}
+            >
+                <DialogTitle id="highscore-dialog-title" sx={{textAlign: 'center', paddingTop: '30px', fontFamily: "'Chalkduster', sans-serif", fontSize: '50px'}}>Game Over</DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="highscore-dialog-description" sx={{color: 'white', textAlign: 'center', paddingTop: '50px', fontSize: '35px', fontFamily: "'Chalkduster', sans-serif",}}>
+                        Your High Score: {score}
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions sx={{ justifyContent: 'center', paddingBottom: '40px', fontSize: '30px' }}>
+                    <Button 
+                        onClick={() => {navigate('/rankings')}} 
+                        color="primary"
+                        sx={{
+                            width: '450px', height: '70px',
+                            backgroundColor: '#1095e0', 
+                            color: 'white', 
+                            '&:hover': {
+                                backgroundColor: '#0d7ecb'
+                            },
+                            fontFamily: "'Chalkduster', sans-serif",
+                            fontSize: '25px'
+                        }} 
+                    >
+                        Go to Leaderboard
+                    </Button>
+                </DialogActions>
+            </Dialog>
     </>
 
     )
