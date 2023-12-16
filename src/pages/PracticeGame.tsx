@@ -1,4 +1,4 @@
-import { Box, Button } from '@mui/material';
+import { Box, Button, TextField, Typography } from '@mui/material';
 import background from '../../resources/background.png';
 import Header from '../components/Header';
 import '../styles/Header.css';import React, {useState, useEffect} from 'react';
@@ -30,36 +30,32 @@ export const PracticeGame: React.FC = () => {
         const randomPosition = Math.floor(Math.random() * QUESTION_ENDPOINTS.length);
         console.log(`random pos is ${randomPosition}`)
         const randomEndpoint = QUESTION_ENDPOINTS[randomPosition];
-        try {
-            const response = await fetch(randomEndpoint, {
-                method: 'POST'
-            });
-            if(!response.ok) {
-                throw new Error("ups");
-            }
-            const data: Question = await response.json();
-            const allAnswers: Answer[] = [];
-            if(randomPosition === 1) {
-                setImageUrl(data.summary);
-            }
-            allAnswers.push({
-                answer: data.name, 
-                isCorrect: true
-            })
-            data.otherPeople.forEach((otherPerson) => {
-                allAnswers.push({
-                    answer: otherPerson, 
-                    isCorrect: false
+        const attemptFetch = async (): Promise<void> => {
+            try {
+                const response = await fetch(randomEndpoint, {
+                    method: 'POST'
+                }); 
+                if(!response.ok) {
+                    throw new Error("ups");
+                }
+                const data: Question = await response.json();
+                const allAnswers: Answer[] = [];
+                if(randomPosition === 1) {
+                    setImageUrl(data.summary);
+                }
+                allAnswers.push({answer: data.name, isCorrect: true});
+                data.otherPeople.forEach((otherPerson) => {
+                    allAnswers.push({answer: otherPerson, isCorrect: false});
                 })
-            })
-            setCurrentQuestion(data);
-            shufleArray(allAnswers);
-            setAnswers(allAnswers)
-        } catch(error) {
-            console.log(error);
-        } finally {
-            setIsLoading(false);
+                setCurrentQuestion(data);
+                shufleArray(allAnswers);
+                setAnswers(allAnswers);
+            } catch(error) {
+                await attemptFetch();
+            }
         }
+        await attemptFetch();
+        setIsLoading(false);
     }
 
     useEffect(() => {
