@@ -22,7 +22,6 @@ export const OnlyText: React.FC = () => {
         setIsLoading(true);
         setSelectedAnswer(null);
         setAnswers([]);
-        setImageUrl('');
         setHasAnswered(false);
         const randomPosition = Math.floor(Math.random() * QUESTION_ENDPOINTS.length);
         console.log(`random pos is ${randomPosition}`)
