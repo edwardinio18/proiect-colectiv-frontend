@@ -39,6 +39,12 @@ const handleSubmit = async (event: React.FormEvent<HTMLFormElement>, setErrors: 
         setErrors(errors);
         return;
     }
+
+    const token = await response.json().then((data) => {
+        return data.token;
+    });
+    localStorage.setItem('token', token);
+
     navigate('/gamemode');
 }
 
