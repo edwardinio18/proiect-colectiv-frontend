@@ -15,7 +15,7 @@ export const Header: React.FC = () => {
       <nav>
         <ul>
           <li onClick={() => navigateToGame('/')}>Home</li>
-          <li onClick={() => navigateToGame('/rankings')}>Rankings</li>
+          <li onClick={() => navigateToGame('/leaderboard/mixed')}>Leaderboard</li>
           <li onClick={() => navigateToGame('/myaccount')}>My Account</li>
         </ul>
       </nav>

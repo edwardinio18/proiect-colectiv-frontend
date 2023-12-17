@@ -1,76 +1,81 @@
-import { Home } from './pages/Home';
-import { Login } from './pages/Login';
-import { Register } from './pages/Register';
-import { Leaderboard } from './pages/Leaderboard';
-import { GameModes } from './pages/GameModes';
-import { MyAccount } from './pages/MyAccount';
+import {Home} from './pages/Home';
+import {Login} from './pages/Login';
+import {Register} from './pages/Register';
+import {LeaderboardMixed} from './pages/LeaderboardMixed.tsx';
+import {LeaderboardText} from './pages/LeaderboardText.tsx';
+import {LeaderboardImage} from './pages/LeaderboardImage.tsx';
+import {GameModes} from './pages/GameModes';
+import {MyAccount} from './pages/MyAccount';
 
 
 import {
   createBrowserRouter,
   RouterProvider
 } from 'react-router-dom'
-import { PracticeGame } from './pages/PracticeGame';
-import { QuestionType } from './pages/QuestionType';
-import { Rankings } from './pages/Rankings';
-import { OnlyText } from './pages/OnlyText';
-import { OnlyPhotos } from './pages/OnlyPhotos';
-import { MixedMode } from './pages/MixedMode';
+import {PracticeGame} from './pages/PracticeGame';
+import {QuestionType} from './pages/QuestionType';
+import {OnlyText} from './pages/OnlyText';
+import {OnlyPhotos} from './pages/OnlyPhotos';
+import {MixedMode} from './pages/MixedMode';
 
 
 function App() {
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <Home />
-    },
-    {
-      path: '/login',
-      element: <Login />
+      element: <Home/>
     },
     {
       path: '/register',
-      element: <Register />
-    },
-    {
-      path: '/leaderboard',
-      element: <Leaderboard />
+      element: <Register/>
     },
     {
       path: '/gamemode',
-      element: <GameModes />
+      element: <GameModes/>
+    },
+    {
+      path: '/leaderboard/mixed',
+      element: <LeaderboardMixed/>
+    },
+    {
+      path: '/leaderboard/text',
+      element: <LeaderboardText/>
+    },
+    {
+      path: '/leaderboard/image',
+      element: <LeaderboardImage/>
+    },
+    {
+      path: '/login',
+      element: <Login/>
     },
     {
       path: '/myaccount',
-      element: <MyAccount />
+      element: <MyAccount/>
     },
     {
       path: '/practice',
-      element: <PracticeGame />
+      element: <PracticeGame/>
     },
     {
       path: '/question-type',
-      element: <QuestionType />
+      element: <QuestionType/>
     },
     {
-      path: '/rankings',
-      element: <Rankings />
-    }, 
-    {
-      path: '/normal-text', 
+      path: '/normal-text',
       element: < OnlyText/>
-    }, 
+    },
     {
       path: '/normal-images',
       element: <OnlyPhotos/>
-    }, 
+    },
     {
-      path: '/normal-mixed', 
+      path: '/normal-mixed',
       element: <MixedMode/>
     }
   ])
   return (
-    <RouterProvider router={router} />
+    <RouterProvider router={router}/>
   )
 }
 
