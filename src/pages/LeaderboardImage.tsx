@@ -7,14 +7,8 @@ import {Jwt} from '../interfaces/Jwt';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-const TOKEN = jwtDecode<Jwt>(localStorage.getItem('token')!);
-const USER_ID = TOKEN.nameid;
-
-const USER_USERNAME_URL = `${API_URL}/Users/${USER_ID}`;
-const LEADERBOARD_URL = `${API_URL}/Leaderboard/photos`;
-
-const getAllLeaderboardData = async () => {
-  const response = await fetch(LEADERBOARD_URL);
+const getAllLeaderboardData = async (leaderboardUrl: string) => {
+  const response = await fetch(leaderboardUrl);
   const data = await response.json();
 
   data.sort((a: any, b: any) => b.score - a.score);
@@ -22,17 +16,23 @@ const getAllLeaderboardData = async () => {
   return data;
 };
 
-const getCurrentUserLeaderboardData = async (userUsername: string) => {
-  const response = await fetch(`${LEADERBOARD_URL}/${userUsername}`);
+const getCurrentUserLeaderboardData = async (userUsername: string, leaderboardUrl: string) => {
+  const response = await fetch(`${leaderboardUrl}/${userUsername}`);
   return await response.json();
 };
 
-const getUserUsername = async () => {
-  const response = await fetch(USER_USERNAME_URL);
+const getUserUsername = async (userUsernameUrl: string) => {
+  const response = await fetch(userUsernameUrl);
   return await response.text();
 };
 
 export function LeaderboardImage() {
+  const TOKEN = jwtDecode<Jwt>(localStorage.getItem('token')!) ?? {nameid: ''};
+  const USER_ID = TOKEN.nameid ?? '';
+
+  const USER_USERNAME_URL = `${API_URL}/Users/${USER_ID}`;
+  const LEADERBOARD_URL = `${API_URL}/Leaderboard/photos`;
+
   const [leaderboardData, setLeaderboardData] = useState([]);
   const [currentUserLeaderboardData, setCurrentUserLeaderboardData] = useState({
     position: 0,
@@ -44,13 +44,13 @@ export function LeaderboardImage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getAllLeaderboardData();
+      const data = await getAllLeaderboardData(LEADERBOARD_URL);
       setLeaderboardData(data);
 
-      const userUsernameData = await getUserUsername();
+      const userUsernameData = await getUserUsername(USER_USERNAME_URL);
       setUserUsername(userUsernameData);
 
-      const currentUserData = await getCurrentUserLeaderboardData(userUsernameData);
+      const currentUserData = await getCurrentUserLeaderboardData(userUsernameData, LEADERBOARD_URL);
       setCurrentUserLeaderboardData(currentUserData);
     };
 
