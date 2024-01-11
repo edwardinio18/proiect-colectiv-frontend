@@ -1,6 +1,6 @@
 import { Box, Button, TextField, Typography } from '@mui/material';
 import background from '../../resources/background.png';
-import Header from '../components/Header';
+import HomeHeader from "../components/HomeHeader.tsx";
 import '../styles/Header.css';
 import '../styles/GameModes.css';
 import React, { useState } from 'react';
@@ -58,7 +58,7 @@ export function Login() {
         <Box style={{
             color: 'white',
         }}>
-            <Header />
+            <HomeHeader />
 
             <Box style={{
                 backgroundImage: `url(${background})`,
