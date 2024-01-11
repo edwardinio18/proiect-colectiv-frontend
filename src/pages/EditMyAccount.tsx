@@ -12,8 +12,8 @@ const API_URL = import.meta.env.VITE_API_URL;
 export const EditMyAccount: React.FC = () => {
     const TOKEN = jwtDecode<Jwt>(localStorage.getItem('token')!);
     const USER_ID = TOKEN.nameid;
-    const USER_USERNAME_URL = `${API_URL}/Users/${USER_ID}`;
-    const USER_PASSWORD_URL = `${API_URL}/Users/${USER_ID}/change-password`;
+    const USER_USERNAME_URL = `${API_URL}/Users/UpdateUsername/${USER_ID}`;
+    const USER_PASSWORD_URL = `${API_URL}/Users/UpdatePassword/${USER_ID}`;
 
     const [newUsername, setNewUsername] = useState('');
     const [newPassword, setNewPassword] = useState('');
@@ -39,7 +39,9 @@ export const EditMyAccount: React.FC = () => {
         }
 
         try {
-            const requestData = { newUsername };
+            const requestData = {
+                'Username': newUsername,
+            };
 
             const response = await fetch(USER_USERNAME_URL, {
                 method: 'PUT',
@@ -49,20 +51,12 @@ export const EditMyAccount: React.FC = () => {
                 body: JSON.stringify(requestData),
             });
 
-            const responseData = await response.json();
-
-            if (responseData.usernameExists) {
-                setErrorMessage('Username is already in use. Please choose a different one.');
-                return;
-            }
-
             if (response.ok) {
                 setSuccessMessage('Username updated successfully.');
             } else {
                 setErrorMessage('Failed to update username. Please try again.');
             }
         } catch (error) {
-            console.error('Error updating username:', error);
             setErrorMessage('An error occurred while updating the username.');
         }
     };
@@ -79,7 +73,9 @@ export const EditMyAccount: React.FC = () => {
         }
 
         try {
-            const requestData = { newPassword };
+            const requestData = {
+                'Password': newPassword,
+            }
 
             const response = await fetch(USER_PASSWORD_URL, {
                 method: 'PUT',
@@ -95,7 +91,6 @@ export const EditMyAccount: React.FC = () => {
                 setErrorMessage('Failed to update password. Please try again.');
             }
         } catch (error) {
-            console.error('Error updating password:', error);
             setErrorMessage('An error occurred while updating the password.');
         }
     };
