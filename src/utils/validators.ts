@@ -1,5 +1,5 @@
 export enum PasswordError {
-    LengthSmallerThan8 = "Password must be at least 8 characthers", 
+    LengthSmallerThan8 = "Password must be at least 8 characters",
     NoUpperCaseLetter = "Password must contain at least one uppercase letter"  
 }
 
