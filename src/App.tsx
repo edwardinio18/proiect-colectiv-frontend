@@ -6,6 +6,7 @@ import {LeaderboardText} from './pages/LeaderboardText.tsx';
 import {LeaderboardImage} from './pages/LeaderboardImage.tsx';
 import {GameModes} from './pages/GameModes';
 import {MyAccount} from './pages/MyAccount';
+import {EditMyAccount} from './pages/EditMyAccount';
 
 
 import {
@@ -52,6 +53,10 @@ function App() {
     {
       path: '/myaccount',
       element: <MyAccount/>
+    },
+    {
+      path: '/editmyaccount',
+        element: <EditMyAccount/>
     },
     {
       path: '/practice',
