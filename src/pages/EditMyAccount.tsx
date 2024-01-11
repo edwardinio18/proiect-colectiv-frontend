@@ -15,6 +15,8 @@ export const EditMyAccount: React.FC = () => {
 
     const [newUsername, setNewUsername] = useState('');
     const [newPassword, setNewPassword] = useState('');
+    const [changeUsername, setChangeUsername] = useState(false);
+    const [changePassword, setChangePassword] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -26,22 +28,61 @@ export const EditMyAccount: React.FC = () => {
         setNewPassword(event.target.value);
     };
 
+    const handleUsernameCheckboxChange = () => {
+        setChangeUsername(!changeUsername);
+    };
+
+    const handlePasswordCheckboxChange = () => {
+        setChangePassword(!changePassword);
+    };
+
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
 
+        if (!changeUsername && !changePassword) {
+            setErrorMessage('Please select at least one field to update.');
+            return;
+        }
+
         try {
-            const response = await fetch(USER_USERNAME_URL, {
+            const requestData = {
+                changeUsername,
+                changePassword,
+                newUsername: changeUsername ? newUsername : undefined,
+                newPassword: changePassword ? newPassword : undefined,
+            };
+
+            // Validate the new username and password on the server-side
+            const validationResponse = await fetch(`${API_URL}/validate`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestData),
+            });
+
+            const validationData = await validationResponse.json();
+
+            if (validationData.usernameExists) {
+                setErrorMessage('Username is already in use. Please choose a different one.');
+                return;
+            }
+
+            if (validationData.passwordExists) {
+                setErrorMessage('Password is already in use. Please choose a different one.');
+                return;
+            }
+
+            // If validation passes, update the account
+            const updateResponse = await fetch(USER_USERNAME_URL, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    newUsername,
-                    newPassword,
-                }),
+                body: JSON.stringify(requestData),
             });
 
-            if (response.ok) {
+            if (updateResponse.ok) {
                 setSuccessMessage('Account updated successfully.');
             } else {
                 setErrorMessage('Failed to update account. Please try again.');
@@ -61,27 +102,51 @@ export const EditMyAccount: React.FC = () => {
                 {errorMessage && <p className="error-message">{errorMessage}</p>}
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
-                        <label htmlFor="newUsername">New Username:</label>
-                        <input
-                            type="text"
-                            id="newUsername"
-                            name="newUsername"
-                            value={newUsername}
-                            onChange={handleUsernameChange}
-                            required
-                        />
+                        <label>
+                            <input
+                                type="checkbox"
+                                checked={changeUsername}
+                                onChange={handleUsernameCheckboxChange}
+                            />
+                            Change Username
+                        </label>
                     </div>
+                    {changeUsername && (
+                        <div className="form-group">
+                            <label htmlFor="newUsername">New Username:</label>
+                            <input
+                                type="text"
+                                id="newUsername"
+                                name="newUsername"
+                                value={newUsername}
+                                onChange={handleUsernameChange}
+                                required
+                            />
+                        </div>
+                    )}
                     <div className="form-group">
-                        <label htmlFor="newPassword">New Password:</label>
-                        <input
-                            type="password"
-                            id="newPassword"
-                            name="newPassword"
-                            value={newPassword}
-                            onChange={handlePasswordChange}
-                            required
-                        />
+                        <label>
+                            <input
+                                type="checkbox"
+                                checked={changePassword}
+                                onChange={handlePasswordCheckboxChange}
+                            />
+                            Change Password
+                        </label>
                     </div>
+                    {changePassword && (
+                        <div className="form-group">
+                            <label htmlFor="newPassword">New Password:</label>
+                            <input
+                                type="password"
+                                id="newPassword"
+                                name="newPassword"
+                                value={newPassword}
+                                onChange={handlePasswordChange}
+                                required
+                            />
+                        </div>
+                    )}
                     <button type="submit">Save Changes</button>
                 </form>
                 <Link to="/myaccount" className="back-button">
