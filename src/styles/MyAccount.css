@@ -1,5 +1,3 @@
-/* MyAccount.css */
-
 .edit-account-container {
     display: flex;
     flex-direction: column;
@@ -68,4 +66,22 @@ a {
 
 a:hover {
     color: #0056b3;
+}
+
+.chalkduster-font {
+    font-family: 'Chalkduster', sans-serif;
+}
+
+.enlarged-input {
+    font-size: 18px;
+    padding: 12px;
+}
+
+.small-button {
+    padding: 15px 300px;
+    font-size: 1rem;
+}
+
+.form-section {
+    margin-bottom: 20px;
 }

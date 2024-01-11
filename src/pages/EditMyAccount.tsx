@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import { Link } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import { Jwt } from '../interfaces/Jwt.ts';
+import { validateUsername, validatePasswd } from '../utils/validators';
 import '../styles/GameModes.css';
 import '../styles/MyAccount.css';
 
@@ -12,11 +13,10 @@ export const EditMyAccount: React.FC = () => {
     const TOKEN = jwtDecode<Jwt>(localStorage.getItem('token')!);
     const USER_ID = TOKEN.nameid;
     const USER_USERNAME_URL = `${API_URL}/Users/${USER_ID}`;
+    const USER_PASSWORD_URL = `${API_URL}/Users/${USER_ID}/change-password`;
 
     const [newUsername, setNewUsername] = useState('');
     const [newPassword, setNewPassword] = useState('');
-    const [changeUsername, setChangeUsername] = useState(false);
-    const [changePassword, setChangePassword] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -28,53 +28,20 @@ export const EditMyAccount: React.FC = () => {
         setNewPassword(event.target.value);
     };
 
-    const handleUsernameCheckboxChange = () => {
-        setChangeUsername(!changeUsername);
-    };
-
-    const handlePasswordCheckboxChange = () => {
-        setChangePassword(!changePassword);
-    };
-
-    const handleSubmit = async (event: React.FormEvent) => {
+    const handleUsernameSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
+        setSuccessMessage('');
+        setErrorMessage('');
 
-        if (!changeUsername && !changePassword) {
-            setErrorMessage('Please select at least one field to update.');
+        if (!validateUsername(newUsername)) {
+            setErrorMessage('Invalid username format.');
             return;
         }
 
         try {
-            const requestData = {
-                changeUsername,
-                changePassword,
-                newUsername: changeUsername ? newUsername : undefined,
-                newPassword: changePassword ? newPassword : undefined,
-            };
+            const requestData = { newUsername };
 
-            // Validate the new username and password on the server-side
-            const validationResponse = await fetch(`${API_URL}/validate`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(requestData),
-            });
-
-            const validationData = await validationResponse.json();
-
-            if (validationData.usernameExists) {
-                setErrorMessage('Username is already in use. Please choose a different one.');
-                return;
-            }
-
-            if (validationData.passwordExists) {
-                setErrorMessage('Password is already in use. Please choose a different one.');
-                return;
-            }
-
-            // If validation passes, update the account
-            const updateResponse = await fetch(USER_USERNAME_URL, {
+            const response = await fetch(USER_USERNAME_URL, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -82,14 +49,54 @@ export const EditMyAccount: React.FC = () => {
                 body: JSON.stringify(requestData),
             });
 
-            if (updateResponse.ok) {
-                setSuccessMessage('Account updated successfully.');
+            const responseData = await response.json();
+
+            if (responseData.usernameExists) {
+                setErrorMessage('Username is already in use. Please choose a different one.');
+                return;
+            }
+
+            if (response.ok) {
+                setSuccessMessage('Username updated successfully.');
             } else {
-                setErrorMessage('Failed to update account. Please try again.');
+                setErrorMessage('Failed to update username. Please try again.');
             }
         } catch (error) {
-            console.error('Error updating account:', error);
-            setErrorMessage('An error occurred while updating the account.');
+            console.error('Error updating username:', error);
+            setErrorMessage('An error occurred while updating the username.');
+        }
+    };
+
+    const handlePasswordSubmit = async (event: React.FormEvent) => {
+        event.preventDefault();
+        setSuccessMessage('');
+        setErrorMessage('');
+
+        const passwordValidationResult = validatePasswd(newPassword);
+        if (typeof passwordValidationResult === 'string') {
+            setErrorMessage(passwordValidationResult);
+            return;
+        }
+
+        try {
+            const requestData = { newPassword };
+
+            const response = await fetch(USER_PASSWORD_URL, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestData),
+            });
+
+            if (response.ok) {
+                setSuccessMessage('Password updated successfully.');
+            } else {
+                setErrorMessage('Failed to update password. Please try again.');
+            }
+        } catch (error) {
+            console.error('Error updating password:', error);
+            setErrorMessage('An error occurred while updating the password.');
         }
     };
 
@@ -100,61 +107,51 @@ export const EditMyAccount: React.FC = () => {
                 <h1>Edit My Account</h1>
                 {successMessage && <p className="success-message">{successMessage}</p>}
                 {errorMessage && <p className="error-message">{errorMessage}</p>}
-                <form onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <label>
-                            <input
-                                type="checkbox"
-                                checked={changeUsername}
-                                onChange={handleUsernameCheckboxChange}
-                            />
-                            Change Username
-                        </label>
-                    </div>
-                    {changeUsername && (
+
+                <div className="form-section">
+                    <h2>Change Username</h2>
+                    <form onSubmit={handleUsernameSubmit}>
                         <div className="form-group">
-                            <label htmlFor="newUsername">New Username:</label>
                             <input
                                 type="text"
                                 id="newUsername"
                                 name="newUsername"
+                                placeholder="New Username"
+                                className="chalkduster-font"
                                 value={newUsername}
                                 onChange={handleUsernameChange}
                                 required
                             />
                         </div>
-                    )}
-                    <div className="form-group">
-                        <label>
-                            <input
-                                type="checkbox"
-                                checked={changePassword}
-                                onChange={handlePasswordCheckboxChange}
-                            />
-                            Change Password
-                        </label>
-                    </div>
-                    {changePassword && (
+                        <button type="submit" className="small-button">Change Username</button>
+                    </form>
+                </div>
+
+                <div className="form-section">
+                    <h2>Change Password</h2>
+                    <form onSubmit={handlePasswordSubmit}>
                         <div className="form-group">
-                            <label htmlFor="newPassword">New Password:</label>
                             <input
-                                type="password"
+                                type="text"
                                 id="newPassword"
                                 name="newPassword"
+                                placeholder="New Password"
+                                className="chalkduster-font"
                                 value={newPassword}
                                 onChange={handlePasswordChange}
                                 required
                             />
                         </div>
-                    )}
-                    <button type="submit">Save Changes</button>
-                </form>
+                        <button type="submit" className="small-button">Change Password</button>
+                    </form>
+                </div>
+
                 <Link to="/myaccount" className="back-button">
                     Back to My Account
                 </Link>
             </div>
         </div>
     );
-};
+}
 
 export default EditMyAccount;
