@@ -86,21 +86,17 @@ Adaptable and consistent user experience across different devices.
 ### Installing
 
 1. Clone the repository:
-       `bash
-   git clone git@github.com:edwardinio18/proiect-colectiv-frontend.git
-   `
+    ```bash
+      git clone git@github.com:edwardinio18/proiect-colectiv-frontend.git
 2. Navigate to the project directory:
-       `bash
-   cd proiect-colectiv-frontend
-   `
+    ```bash
+      cd proiect-colectiv-frontend
 3. Install dependencies:
-       `bash
-    npm install
-    `
+    ```bash
+       npm install
 4. Start the development server:
-       `bash
-    npm run dev
-    `
+    ```bash
+       npm run dev
 5. Open http://localhost:5173 in your browser.
 
 ## Mockup Server
@@ -111,7 +107,6 @@ To run a mockup server:
 
 ```bash
 npm run mockup-server
-```
 
 ## Technology Stack
 
@@ -125,3 +120,4 @@ npm run mockup-server
 
 MioriticMinds provides a platform for users to challenge their knowledge in a fun and interactive environment. The
 application's scalable architecture and use of modern web technologies ensure a robust and engaging user experience.
+```
