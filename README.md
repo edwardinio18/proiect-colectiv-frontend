@@ -88,16 +88,20 @@ Adaptable and consistent user experience across different devices.
 1. Clone the repository:
     ```bash
       git clone git@github.com:edwardinio18/proiect-colectiv-frontend.git
-2. Navigate to the project directory:
+    ```
+3. Navigate to the project directory:
     ```bash
       cd proiect-colectiv-frontend
-3. Install dependencies:
+    ```
+5. Install dependencies:
     ```bash
        npm install
-4. Start the development server:
+    ```
+7. Start the development server:
     ```bash
-       npm run dev
-5. Open http://localhost:5173 in your browser.
+       npm run dev
+    ```
+9. Open http://localhost:5173 in your browser.
 
 ## Mockup Server
 
@@ -107,6 +111,7 @@ To run a mockup server:
 
 ```bash
 npm run mockup-server
+```
 
 ## Technology Stack
 
