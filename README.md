@@ -107,6 +107,7 @@ To run a mockup server:
 
 ```bash
 npm run mockup-server
+```
 
 ## Technology Stack
 
