@@ -121,4 +121,3 @@ npm run mockup-server
 
 MioriticMinds provides a platform for users to challenge their knowledge in a fun and interactive environment. The
 application's scalable architecture and use of modern web technologies ensure a robust and engaging user experience.
-```
