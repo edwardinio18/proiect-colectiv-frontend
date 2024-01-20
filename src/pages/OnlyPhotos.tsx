@@ -94,6 +94,7 @@ export const OnlyPhotos: React.FC = () => {
         setHasAnswered(true);
         if (answer.isCorrect) {
             console.log('bravo');
+            setScore((prevScore) => prevScore + 1);
         }
         else {
             console.log('no');

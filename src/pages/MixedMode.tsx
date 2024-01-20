@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import { Question, Answer } from '../interfaces/Question';
 import { shufleArray } from '../utils/shuffleArr';
 import { useNavigate } from 'react-router-dom';
+//Bogdan Petriceicu 
 
 const BASE_API_URL = import.meta.env.VITE_API_URL;
 const QUESTION_ENDPOINTS: string[] = [
@@ -20,7 +21,7 @@ export const MixedMode: React.FC = () => {
     const [hasAnswered, setHasAnswered] = useState<boolean>(false);
     const [imageUrl, setImageUrl] = useState<string>('');
     const [score, setScore] = useState<number>(0);
-    const [timer, setTimer] = useState<number>(10);
+    const [timer, setTimer] = useState<number>(120);
     const [gameOver, setGameOver] = useState<boolean>(false);
 
     const navigate = useNavigate();
