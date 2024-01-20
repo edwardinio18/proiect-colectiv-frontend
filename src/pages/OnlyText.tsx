@@ -20,7 +20,7 @@ export const OnlyText: React.FC = () => {
     const [selectedAnswer, setSelectedAnswer] = useState<Answer | null>(null);
     const [hasAnswered, setHasAnswered] = useState<boolean>(false);
     const [score, setScore] = useState<number>(0);
-    const [timer, setTimer] = useState<number>(120);
+    const [timer, setTimer] = useState<number>(30);
     const [gameOver, setGameOver] = useState<boolean>(false);
 
     const navigate = useNavigate();

@@ -21,7 +21,7 @@ export const MixedMode: React.FC = () => {
     const [hasAnswered, setHasAnswered] = useState<boolean>(false);
     const [imageUrl, setImageUrl] = useState<string>('');
     const [score, setScore] = useState<number>(0);
-    const [timer, setTimer] = useState<number>(120);
+    const [timer, setTimer] = useState<number>(30);
     const [gameOver, setGameOver] = useState<boolean>(false);
 
     const navigate = useNavigate();
